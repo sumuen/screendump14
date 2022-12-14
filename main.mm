@@ -359,6 +359,108 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
     uint16_t usage;
 
     switch (key) {
+	/* TTY Functions */
+	case XK_BackSpace:
+	case XK_Delete: usage = kHIDUsage_KeyboardDeleteOrBackspace; break;
+	case XK_Tab: usage = kHIDUsage_KeyboardTab; break;
+	case XK_Linefeed: usage = kHIDUsage_KeyboardReturnOrEnter; break;
+	case XK_Clear: usage = kHIDUsage_KeyboardClear; break
+	case XK_Return: usage = kHIDUsage_KeyboardReturnOrEnter; break;
+	case XK_Pause: usage = kHIDUsage_KeyboardPause; break;
+	case XK_Scroll_Lock: usage = kHIDUsage_KeyboardScrollLock; break;
+	case XK_Sys_Req: usage = kHIDUsage_KeyboardSysReqOrAttention; break;
+	case XK_Escape: usage = kHIDUsage_KeyboardEscape; break;
+
+	/* Cursor control & motion */
+	case XK_Home: case XK_Begin: usage = kHIDUsage_KeyboardHome; break;
+	case XK_Left: usage = kHIDUsage_KeyboardLeftArrow; break;
+	case XK_Up: usage = kHIDUsage_KeyboardUpArrow; break;
+	case XK_Right: usage = kHIDUsage_KeyboardRightArrow; break;
+	case XK_Down: usage = kHIDUsage_KeyboardDownArrow; break;
+	case XK_Prior: usage = kHIDUsage_KeyboardPrior; break;
+	case XK_Page_Up: usage = kHIDUsage_KeyboardPageUp; break;
+	case XK_Next:
+	case XK_Page_Down: usage = kHIDUsage_KeyboardPageDown; break;
+	case XK_End: usage = kHIDUsage_KeyboardEnd; break
+
+	/* Misc Functions */
+	case XK_Select: usage = kHIDUsage_KeyboardSelect; break;
+	case XK_Print: usage = kHIDUsage_KeyboardPrintScreen; break;
+	case XK_Execute: usage = kHIDUsage_KeyboardExecute; break;
+	case XK_Insert: usage = kHIDUsage_KeyboardInsert; break;
+	case XK_Undo: usage = kHIDUsage_KeyboardUndo; break;
+	case XK_Redo: usage = kHIDUsage_KeyboardAgain; break;
+	case XK_Menu: usage = kHIDUsage_KeyboardMenu; break;
+	case XK_Find: usage = kHIDUsage_KeyboardFind; break;
+	case XK_Cancel: usage = kHIDUsage_KeyboardCancel; break;
+	case XK_Help: usage = kHIDUsage_KeyboardHelp; break;
+	case XK_Break: usage = kHIDUsage_KeyboardF15; break;
+	case XK_Mode_switch:
+	case XK_script_switch: usage = kHIDUsage_KeyboardF19; break;
+	case XK_Num_Lock: usage = kHIDUsage_KeyboardLockingNumLock; break;
+
+	/* Keypad Functions, keypad numbers cleverly chosen to map to ascii */
+	case XK_KP_Enter: usage = kHIDUsage_KeypadEnter; break;∑
+	case XK_KP_Equal: usage = kHIDUsage_KeypadEqualSign; break;
+	case XK_KP_Multiply: usage = kHIDUsage_KeypadAsterisk; break;
+	case XK_KP_Add: usage = kHIDUsage_KeypadPlus; break;
+	case XK_KP_Separator: usage = kHIDUsage_KeypadComma; break;
+	case XK_KP_Subtract: usage = kHIDUsage_KeypadHyphen; break;
+	case XK_KP_Decimal: usage = kHIDUsage_KeypadPeriod; break;
+	case XK_KP_Divide: usage = kHIDUsage_KeypadSlash; break;
+
+	case XK_KP_0: usage = kHIDUsage_Keypad0;
+	case XK_KP_1: usage = kHIDUsage_Keypad1;
+	case XK_KP_2: usage = kHIDUsage_Keypad2;
+	case XK_KP_3: usage = kHIDUsage_Keypad3;
+	case XK_KP_4: usage = kHIDUsage_Keypad4;
+	case XK_KP_5: usage = kHIDUsage_Keypad5;
+	case XK_KP_6: usage = kHIDUsage_Keypad6;
+	case XK_KP_7: usage = kHIDUsage_Keypad7;
+	case XK_KP_8: usage = kHIDUsage_Keypad8;
+	case XK_KP_9: usage = kHIDUsage_Keypad9;
+
+	/* Auxiliary Functions */
+	case XK_F1: usage = kHIDUsage_KeyboardF1; break;
+	case XK_F2: usage = kHIDUsage_KeyboardF2; break;
+	case XK_F3: usage = kHIDUsage_KeyboardF3; break;
+	case XK_F4: usage = kHIDUsage_KeyboardF4; break;
+	case XK_F5: usage = kHIDUsage_KeyboardF5; break;
+	case XK_F6: usage = kHIDUsage_KeyboardF6; break;
+	case XK_F7: usage = kHIDUsage_KeyboardF7; break;
+	case XK_F8: usage = kHIDUsage_KeyboardF8; break;
+	case XK_F9: usage = kHIDUsage_KeyboardF9; break;
+	case XK_F10: usage = kHIDUsage_KeyboardF10; break;
+	case XK_F11: usage = kHIDUsage_KeyboardF11; break;
+	case XK_F12: usage = kHIDUsage_KeyboardF12; break;
+	case XK_F13: usage = kHIDUsage_KeyboardF13; break;
+	case XK_F14: usage = kHIDUsage_KeyboardF14; break;
+	case XK_F15: usage = kHIDUsage_KeyboardF15; break;
+	case XK_F16: usage = kHIDUsage_KeyboardF16; break;
+	case XK_F17: usage = kHIDUsage_KeyboardF17; break;
+	case XK_F18: usage = kHIDUsage_KeyboardF18; break;
+	case XK_F19: usage = kHIDUsage_KeyboardF19; break;
+	case XK_F20: usage = kHIDUsage_KeyboardF20; break;
+	case XK_F21: usage = kHIDUsage_KeyboardF21; break;
+	case XK_F22: usage = kHIDUsage_KeyboardF22; break;
+	case XK_F23: usage = kHIDUsage_KeyboardF23; break;
+	case XK_F24: usage = kHIDUsage_KeyboardF24; break;
+
+	/* Modifiers */
+	case XK_Shift_L: usage = kHIDUsage_KeyboardLeftShift; break;
+	case XK_Shift_R: usage = kHIDUsage_KeyboardRightShift; break;
+	case XK_Control_L: usage = kHIDUsage_KeyboardLeftControl; break;
+	case XK_Control_R: usage = kHIDUsage_KeyboardRightControl; break;
+	case XK_Caps_Lock:
+	case XK_Shift_Lock: usage = kHIDUsage_KeyboardLockingCapsLock; break;
+
+	case XK_Meta_L: usage = kHIDUsage_KeyboardLeftAlt; break;
+	case XK_Meta_R: usage = kHIDUsage_KeyboardRightAlt; break;
+	case XK_Alt_L: usage = kHIDUsage_KeyboardLeftGUI; break;
+	case XK_Alt_R: usage = kHIDUsage_KeyboardRightGUI; break;
+
+	/* Latin */
+	case XK_space: usage = kHIDUsage_KeyboardSpacebar; break;
         case XK_exclam: case XK_1: usage = kHIDUsage_Keyboard1; break;
         case XK_at: case XK_2: usage = kHIDUsage_Keyboard2; break;
         case XK_numbersign: case XK_3: usage = kHIDUsage_Keyboard3; break;
@@ -369,6 +471,13 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
         case XK_asterisk: case XK_8: usage = kHIDUsage_Keyboard8; break;
         case XK_parenleft: case XK_9: usage = kHIDUsage_Keyboard9; break;
         case XK_parenright: case XK_0: usage = kHIDUsage_Keyboard0; break;
+
+	case XK_underscore: case XK_minus: usage = kHIDUsage_KeyboardHyphen; break;
+	case XK_plus: case XK_equal: usage = kHIDUsage_KeyboardEqualSign; break;
+	case XK_greater: case XK_period: usage = kHIDUsage_KeyboardPeriod; break;
+	case XK_question: case XK_slash: usage = kHIDUsage_KeyboardSlash; break;
+	case XK_colon: case XK_semicolon: usage = kHIDUsage_KeyboardSemicolon; break;
+	case XK_less: case XK_comma: usage = kHIDUsage_KeyboardComma; break;
 
         case XK_A: case XK_a: usage = kHIDUsage_KeyboardA; break;
         case XK_B: case XK_b: usage = kHIDUsage_KeyboardB; break;
@@ -397,41 +506,11 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
         case XK_Y: case XK_y: usage = kHIDUsage_KeyboardY; break;
         case XK_Z: case XK_z: usage = kHIDUsage_KeyboardZ; break;
 
-        case XK_underscore: case XK_minus: usage = kHIDUsage_KeyboardHyphen; break;
-        case XK_plus: case XK_equal: usage = kHIDUsage_KeyboardEqualSign; break;
         case XK_braceleft: case XK_bracketleft: usage = kHIDUsage_KeyboardOpenBracket; break;
         case XK_braceright: case XK_bracketright: usage = kHIDUsage_KeyboardCloseBracket; break;
         case XK_bar: case XK_backslash: usage = kHIDUsage_KeyboardBackslash; break;
-        case XK_colon: case XK_semicolon: usage = kHIDUsage_KeyboardSemicolon; break;
         case XK_quotedbl: case XK_apostrophe: usage = kHIDUsage_KeyboardQuote; break;
         case XK_asciitilde: case XK_grave: usage = kHIDUsage_KeyboardGraveAccentAndTilde; break;
-        case XK_less: case XK_comma: usage = kHIDUsage_KeyboardComma; break;
-        case XK_greater: case XK_period: usage = kHIDUsage_KeyboardPeriod; break;
-        case XK_question: case XK_slash: usage = kHIDUsage_KeyboardSlash; break;
-
-        case XK_Return: usage = kHIDUsage_KeyboardReturnOrEnter; break;
-        case XK_BackSpace: usage = kHIDUsage_KeyboardDeleteOrBackspace; break;
-        case XK_Tab: usage = kHIDUsage_KeyboardTab; break;
-        case XK_space: usage = kHIDUsage_KeyboardSpacebar; break;
-
-        case XK_Shift_L: usage = kHIDUsage_KeyboardLeftShift; break;
-        case XK_Shift_R: usage = kHIDUsage_KeyboardRightShift; break;
-        case XK_Control_L: usage = kHIDUsage_KeyboardLeftControl; break;
-        case XK_Control_R: usage = kHIDUsage_KeyboardRightControl; break;
-        case XK_Meta_L: usage = kHIDUsage_KeyboardLeftAlt; break;
-        case XK_Meta_R: usage = kHIDUsage_KeyboardRightAlt; break;
-        case XK_Alt_L: usage = kHIDUsage_KeyboardLeftGUI; break;
-        case XK_Alt_R: usage = kHIDUsage_KeyboardRightGUI; break;
-
-        case XK_Up: usage = kHIDUsage_KeyboardUpArrow; break;
-        case XK_Down: usage = kHIDUsage_KeyboardDownArrow; break;
-        case XK_Left: usage = kHIDUsage_KeyboardLeftArrow; break;
-        case XK_Right: usage = kHIDUsage_KeyboardRightArrow; break;
-
-        case XK_Home: case XK_Begin: usage = kHIDUsage_KeyboardHome; break;
-        case XK_End: usage = kHIDUsage_KeyboardEnd; break;
-        case XK_Page_Up: usage = kHIDUsage_KeyboardPageUp; break;
-        case XK_Page_Down: usage = kHIDUsage_KeyboardPageDown; break;
 
         default: return;
     }

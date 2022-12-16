@@ -1,12 +1,16 @@
-Package: com.julioverne.screendump13
-Name: screendump (iOS 13)
-Depends: mobilesubstrate, preferenceloader
-Conflicts: com.cosmosgenius.screendump
+Package: com.torrekie.screendump14
+Name: ScreenDump (iOS 14)
+Pre-Depends: firmware (>= 14.0)
+Depends: mobilesubstrate, preferenceloader, libvncserver (>= 0.9.13) | libvncserver1 (>= 0.9.13)
+Conflicts: com.cosmosgenius.screendump, com.julioverne.screendump, com.julioverne.screendump13
+Replaces: com.cosmosgenius.screendump, com.julioverne.screendump, com.julioverne.screendump13
+Provides: com.cosmosgenius.screendump, com.julioverne.screendump, com.julioverne.screendump13
 Architecture: iphoneos-arm
-Description: VNC for ios
-Maintainer: Julio
+Description: VNC server for iOS
+Maintainer: Torrekie <me@torrekie.dev>
 Author: julioverne, Sharat M R
 Section: Tweaks
-Version: 0.0.3d
-Depiction: http://julioverne.github.io/description.html?id=com.julioverne.screendump13
-Icon: file:///Library/PreferenceLoader/Preferences/screendump/ScreenDump@2x.png
+Tag: purpose::daemon, role::hacker
+Homepage: https://github.com/Torrekie/screendump14
+Version: 0.0.4pre1
+Icon: file:///Library/PreferenceLoader/Preferences/ScreenDump/ScreenDump@2x.png

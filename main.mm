@@ -2,7 +2,7 @@
 #include <substrate.h>
 #include <rfb/rfb.h>
 
-#define kSettingsPath @"//var/mobile/Library/Preferences/com.cosmosgenius.screendump.plist"
+#define kSettingsPath @"//var/mobile/Library/Preferences/com.torrekie.screendump.plist"
 
 static bool CCSisEnabled = true;
 static NSString *CCSPassword = nil;
@@ -49,7 +49,6 @@ typedef mach_port_t io_service_t;
 typedef kern_return_t IOReturn;
 typedef IOReturn IOMobileFramebufferReturn;
 typedef io_service_t IOMobileFramebufferService;
-extern "C" mach_port_t mach_task_self(void);
 extern "C" void IOSurfaceFlushProcessorCaches(IOSurfaceRef buffer);
 extern "C" int IOSurfaceLock(IOSurfaceRef surface, uint32_t options, uint32_t *seed);
 extern "C" int IOSurfaceUnlock(IOSurfaceRef surface, uint32_t options, uint32_t *seed);
@@ -196,7 +195,7 @@ static void loadPrefs(void)
 {
 	@autoreleasepool {
 		NSDictionary* defaults = nil;
-		CFStringRef appID = CFSTR("com.cosmosgenius.screendump");
+		CFStringRef appID = CFSTR("com.torrekie.screendump");
 		CFArrayRef keyList = CFPreferencesCopyKeyList(appID, CFSTR("mobile"), kCFPreferencesAnyHost);
 		if(keyList) {
 			defaults = (NSDictionary *)CFPreferencesCopyMultiple(keyList, appID, CFSTR("mobile"), kCFPreferencesAnyHost)?:@{};
@@ -284,8 +283,8 @@ static void restartServer()
 
 int main(int argc, const char *argv[])
 {
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.cosmosgenius.screendump/preferences.changed"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)restartServer, CFSTR("com.cosmosgenius.screendump/restart"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.torrekie.screendump/preferences.changed"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)restartServer, CFSTR("com.torrekie.screendump/restart"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 	
     loadPrefs();
 	
@@ -364,7 +363,7 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
 	case XK_Delete: usage = kHIDUsage_KeyboardDeleteOrBackspace; break;
 	case XK_Tab: usage = kHIDUsage_KeyboardTab; break;
 	case XK_Linefeed: usage = kHIDUsage_KeyboardReturnOrEnter; break;
-	case XK_Clear: usage = kHIDUsage_KeyboardClear; break
+	case XK_Clear: usage = kHIDUsage_KeyboardClear; break;
 	case XK_Return: usage = kHIDUsage_KeyboardReturnOrEnter; break;
 	case XK_Pause: usage = kHIDUsage_KeyboardPause; break;
 	case XK_Scroll_Lock: usage = kHIDUsage_KeyboardScrollLock; break;
@@ -377,11 +376,11 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
 	case XK_Up: usage = kHIDUsage_KeyboardUpArrow; break;
 	case XK_Right: usage = kHIDUsage_KeyboardRightArrow; break;
 	case XK_Down: usage = kHIDUsage_KeyboardDownArrow; break;
-	case XK_Prior: usage = kHIDUsage_KeyboardPrior; break;
+//	case XK_Prior: usage = kHIDUsage_KeyboardPrior; break;
 	case XK_Page_Up: usage = kHIDUsage_KeyboardPageUp; break;
-	case XK_Next:
+//	case XK_Next:
 	case XK_Page_Down: usage = kHIDUsage_KeyboardPageDown; break;
-	case XK_End: usage = kHIDUsage_KeyboardEnd; break
+	case XK_End: usage = kHIDUsage_KeyboardEnd; break;
 
 	/* Misc Functions */
 	case XK_Select: usage = kHIDUsage_KeyboardSelect; break;
@@ -395,12 +394,12 @@ static void VNCKeyboard(rfbBool down, rfbKeySym key, rfbClientPtr client)
 	case XK_Cancel: usage = kHIDUsage_KeyboardCancel; break;
 	case XK_Help: usage = kHIDUsage_KeyboardHelp; break;
 	case XK_Break: usage = kHIDUsage_KeyboardF15; break;
-	case XK_Mode_switch:
+//	case XK_Mode_switch:
 	case XK_script_switch: usage = kHIDUsage_KeyboardF19; break;
 	case XK_Num_Lock: usage = kHIDUsage_KeyboardLockingNumLock; break;
 
 	/* Keypad Functions, keypad numbers cleverly chosen to map to ascii */
-	case XK_KP_Enter: usage = kHIDUsage_KeypadEnter; break;∑
+	case XK_KP_Enter: usage = kHIDUsage_KeypadEnter; break;
 	case XK_KP_Equal: usage = kHIDUsage_KeypadEqualSign; break;
 	case XK_KP_Multiply: usage = kHIDUsage_KeypadAsterisk; break;
 	case XK_KP_Add: usage = kHIDUsage_KeypadPlus; break;

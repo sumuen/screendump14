@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.julioverne.screendumpd</string>
+	<string>com.torrekie.screendumpd</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/usr/libexec/screendumpd</string>

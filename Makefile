@@ -21,6 +21,7 @@ $(TOOL_NAME)_ARCHS = arm64
 
 include $(THEOS_MAKE_PATH)/tool.mk
 
+
 else
 
 all:

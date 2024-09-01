@@ -21,8 +21,11 @@ $(TOOL_NAME)_ARCHS = arm64
 
 include $(THEOS_MAKE_PATH)/tool.mk
 
+endif  # <-- Add this line
 
 else
 
 all:
 	@echo "Please manually compile it by `$$(IOS_CLANG) -x objective-c++ main.mm -w -Wl,-segalign,4000,-stack_size,100000 -lvncserver`"
+
+endif  # <-- This line closes the 'else' block

@@ -23,8 +23,7 @@ include $(THEOS_MAKE_PATH)/tool.mk
 
 endif  # End of THEOS block
 
-# Removed the else block because it seems unnecessary for your CI process.
-
-all:
+all:  # This is the standard way to define the 'all' target.
 	@echo "Please manually compile it by `$$(IOS_CLANG) -x objective-c++ main.mm -w -Wl,-segalign,4000,-stack_size,100000 -lvncserver`"
 
+# Make sure there's no other 'all' target or 'all::' target elsewhere in the file

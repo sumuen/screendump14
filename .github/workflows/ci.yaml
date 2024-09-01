@@ -1,0 +1,41 @@
+name: Theos CI
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Theos Setup (Setup)
+        uses: NyaMisty/theos-action@master
+
+      - name: Get tag
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+
+      - name: Build Release package
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          make clean
+          TAGNAME=${{ steps.tag.outputs.tag }}
+          make package FINALPACKAGE=1 PACKAGE_VERSION=${TAGNAME#v}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        with:
+          files: |
+            ${{ github.workspace }}/packages/*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
